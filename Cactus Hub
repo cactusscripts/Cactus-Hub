@@ -1,10 +1,4 @@
 -- Cactus Hub | Camera TD
--- Cosmetic rebranding and offline string deobfuscation of supplied Luau source.
--- Game name: Camera TD (preserved). No author displayed; Discord invite updated.
--- No executor compatibility restrictions were changed.
--- WARNING: Contains code loading from third-party URLs and Discord webhooks.
--- This file has NOT been run or verified safe in Roblox.
--- Only share this script if you have permission to redistribute the underlying code.
 
 do
 local _0x7f63=""
