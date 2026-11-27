@@ -1,4 +1,4 @@
--- Cactus Hub | Toilet Tower Defense | Forest Green WindUI
+-- Cactus Hub | Toilet Tower Defense | Forest Green WindUI | Restored Macro Workspace
 -- Saves the updated source for its original auto-execute / teleport queue.
 local CACTUS_TTD_SOURCE = [============[
 -- Cactus Hub | Toilet Tower Defense
@@ -187,7 +187,151 @@ __sdpgkqnjgmgf.Fetching=false if not _gechjmyue then return false,_wrjgcbbkaxbsj
 _x_fxgrkgmf[433]="Macro JSON"
 _x_fxgrkgmf[434]="Paste the complete recorded macro JSON"
 _x_fxgrkgmf[436]="{ \"Game\": ... , \"Actions\": [...] }"
-_pqowshq.Tab:Section({Title=_x_fxgrkgmf[430]}) local _IIl1Illl1IIl1,l1ll1lll11=_1l1I11l1,_1l1I11l1 local lI1ll1IlI1=_pqowshq.Tab:Input({Title=_x_fxgrkgmf[431],Desc=_x_fxgrkgmf[432],Placeholder=_x_fxgrkgmf[418],Value=_1l1I11l1,Callback=function(_tsmsficgh) _IIl1Illl1IIl1=tostring(_tsmsficgh or _1l1I11l1) end}) local II11I11I1l1l=_pqowshq.Tab:Input({Title=_x_fxgrkgmf[433],Desc=_x_fxgrkgmf[434],Type=_x_fxgrkgmf[435],ClearTextOnFocus=false,Placeholder=_x_fxgrkgmf[436],Value=_1l1I11l1,Callback=function(I1I1lI1llIl1I) l1ll1lll11=tostring(I1I1lI1llIl1I or _1l1I11l1) end}) _pqowshq.Tab:Button({Title=_x_fxgrkgmf[430],Icon=_x_fxgrkgmf[437],Callback=function() local _0x273881e4,Il1llIll1l1,_hxqmpkkliv=__sdpgkqnjgmgf.Import(l1ll1lll11,_IIl1Illl1IIl1) if not _0x273881e4 then _pqowshq.Notify(Il1llIll1l1) return end _IIl1Illl1IIl1=Il1llIll1l1 l1ll1lll11=_1l1I11l1 lI1ll1IlI1:Set(Il1llIll1l1) II11I11I1l1l:Set(_1l1I11l1) local _0x2bb7c67f,_Il1lIlIl11=IIl1IIIl1l1l(_pqowshq.Refresh,Il1llIll1l1) _pqowshq.Notify(_x_fxgrkgmf[438] .. Il1llIll1l1 .. _x_fxgrkgmf[439] .. tostring(_hxqmpkkliv) .. _x_fxgrkgmf[440] .. (not _0x2bb7c67f and _x_fxgrkgmf[441] or _1l1I11l1)) end}) end _lllIl1ll:Button({Title="Cactus Hub Discord",Desc="Copy the Cactus Hub server invite",Icon="link",Callback=function()
+_pqowshq.Tab:Section({Title=_x_fxgrkgmf[430]}) local _IIl1Illl1IIl1,l1ll1lll11=_1l1I11l1,_1l1I11l1 local lI1ll1IlI1=_pqowshq.Tab:Input({Title=_x_fxgrkgmf[431],Desc=_x_fxgrkgmf[432],Placeholder=_x_fxgrkgmf[418],Value=_1l1I11l1,Callback=function(_tsmsficgh) _IIl1Illl1IIl1=tostring(_tsmsficgh or _1l1I11l1) end}) local II11I11I1l1l=_pqowshq.Tab:Input({Title=_x_fxgrkgmf[433],Desc=_x_fxgrkgmf[434],Type=_x_fxgrkgmf[435],ClearTextOnFocus=false,Placeholder=_x_fxgrkgmf[436],Value=_1l1I11l1,Callback=function(I1I1lI1llIl1I) l1ll1lll11=tostring(I1I1lI1llIl1I or _1l1I11l1) end}) _pqowshq.Tab:Button({Title=_x_fxgrkgmf[430],Icon=_x_fxgrkgmf[437],Callback=function() local _0x273881e4,Il1llIll1l1,_hxqmpkkliv=__sdpgkqnjgmgf.Import(l1ll1lll11,_IIl1Illl1IIl1) if not _0x273881e4 then _pqowshq.Notify(Il1llIll1l1) return end _IIl1Illl1IIl1=Il1llIll1l1 l1ll1lll11=_1l1I11l1 lI1ll1IlI1:Set(Il1llIll1l1) II11I11I1l1l:Set(_1l1I11l1) local _0x2bb7c67f,_Il1lIlIl11=IIl1IIIl1l1l(_pqowshq.Refresh,Il1llIll1l1) _pqowshq.Notify(_x_fxgrkgmf[438] .. Il1llIll1l1 .. _x_fxgrkgmf[439] .. tostring(_hxqmpkkliv) .. _x_fxgrkgmf[440] .. (not _0x2bb7c67f and _x_fxgrkgmf[441] or _1l1I11l1)) end}) 
+-- Cactus Hub TTD: restored offline / workspace macro tools.
+-- These controls use the EXISTING profile loader/import validator, not a URL.
+_pqowshq.Tab:Section({Title="Macro Workspace Tools"})
+local cactusLocalImportName = ""
+_pqowshq.Tab:Input({
+    Title="Local JSON filename",
+    Desc="Place a .json macro in ToiletTD_Macros/Imports. No URL or remote importer.",
+    Placeholder="example.json",
+    Value="",
+    Callback=function(value)
+        cactusLocalImportName=tostring(value or "")
+    end
+})
+local function cactusImportResult(ok, nameOrMessage, actionCount)
+    if not ok then
+        _pqowshq.Notify("Macro import: "..tostring(nameOrMessage))
+        return
+    end
+    pcall(_pqowshq.Refresh)
+    _pqowshq.Notify("Imported "..tostring(nameOrMessage).." ("..tostring(actionCount).." actions)")
+end
+_pqowshq.Tab:Button({
+    Title="Import Local JSON File",
+    Icon="file-input",
+    Callback=function()
+        if _pqowshq.Busy() then _pqowshq.Notify("Stop recording / playback before importing") return end
+        if type(isfile)~="function" or type(readfile)~="function" then
+            _pqowshq.Notify("Local file reading is unavailable") return
+        end
+        local name=cactusLocalImportName:match("^%s*(.-)%s*$")
+        if not name:match("^[%w_%-]+%.json$") then
+            _pqowshq.Notify("Use a filename such as example.json (letters, digits, _ and - only)")
+            return
+        end
+        local path="ToiletTD_Macros/Imports/"..name
+        local existsOk, exists=pcall(isfile,path)
+        if not existsOk or not exists then
+            _pqowshq.Notify("File not found: "..path) return
+        end
+        local ok, contents=pcall(readfile,path)
+        if not ok or type(contents)~="string" then
+            _pqowshq.Notify("Could not read local JSON") return
+        end
+        local importOk, nameOrMessage, actionCount=__sdpgkqnjgmgf.Import(contents,name:gsub("%.json$",""))
+        cactusImportResult(importOk,nameOrMessage,actionCount)
+    end
+})
+_pqowshq.Tab:Button({
+    Title="Import JSON from Clipboard",
+    Icon="clipboard-paste",
+    Callback=function()
+        if type(getclipboard)~="function" then
+            _pqowshq.Notify("Clipboard reading is unavailable. Paste JSON into the field above instead.")
+            return
+        end
+        local ok, contents=pcall(getclipboard)
+        if not ok or type(contents)~="string" or contents=="" then
+            _pqowshq.Notify("Clipboard does not contain macro JSON") return
+        end
+        local importOk,nameOrMessage,actionCount=__sdpgkqnjgmgf.Import(contents,"")
+        cactusImportResult(importOk,nameOrMessage,actionCount)
+    end
+})
+_pqowshq.Tab:Button({
+    Title="Export Selected Macro",
+    Icon="file-output",
+    Callback=function()
+        if _pqowshq.Busy() then
+            _pqowshq.Notify("Stop recording / playback before exporting") return
+        end
+        local name=_pqowshq.Owner.Profile
+        if type(name)~="string" or name=="" then
+            _pqowshq.Notify("Select a saved macro profile first") return
+        end
+        if type(isfile)~="function" or type(readfile)~="function" then
+            _pqowshq.Notify("Local file reading is unavailable") return
+        end
+        local path=_pqowshq.Path(name)
+        local existsOk, exists=pcall(isfile,path)
+        if not existsOk or not exists then
+            _pqowshq.Notify("Selected macro file not found") return
+        end
+        local ok, json=pcall(readfile,path)
+        if not ok or type(json)~="string" then
+            _pqowshq.Notify("Could not load selected macro") return
+        end
+        local decodedOk, decoded=pcall(function() return _pqowshq.HTTP:JSONDecode(json) end)
+        if not decodedOk or type(decoded)~="table" or type(decoded.Actions)~="table" then
+            _pqowshq.Notify("Selected file is not a valid macro JSON") return
+        end
+        if type(setclipboard)=="function" then
+            local copied=pcall(setclipboard,json)
+            if copied then
+                _pqowshq.Notify("Selected macro copied as JSON ("..#decoded.Actions.." actions)")
+                return
+            end
+        end
+        if type(makefolder)~="function" or type(writefile)~="function" then
+            _pqowshq.Notify("Clipboard and export file APIs are unavailable") return
+        end
+        local okSave, savedPath=pcall(function()
+            local folder="ToiletTD_Macros/Exports"
+            if not isfolder(folder) then makefolder(folder) end
+            local safeName=_pqowshq.Clean(name)
+            local dest=folder.."/"..safeName.."_backup_"..tostring(os.time())..".json"
+            writefile(dest,json)
+            return dest
+        end)
+        if okSave then
+            _pqowshq.Notify("Saved JSON backup: "..savedPath)
+        else
+            _pqowshq.Notify("Unable to export selected macro")
+        end
+    end
+})
+local cactusActionSummary=_pqowshq.Tab:Paragraph({
+    Title="Recorded Action Breakdown",
+    Desc="Press Refresh to count actions in the loaded macro."
+})
+_pqowshq.Tab:Button({
+    Title="Refresh Action Breakdown",
+    Icon="list-checks",
+    Callback=function()
+        local actions=_pqowshq.Owner.Actions
+        if type(actions)~="table" then
+            cactusActionSummary:SetDesc("No macro loaded")
+            return
+        end
+        local counts={}
+        for _, action in ipairs(actions) do
+            local kind=type(action)=="table" and tostring(action[_pqowshq.KindKey] or "Unknown") or "Unknown"
+            counts[kind]=(counts[kind] or 0)+1
+        end
+        local labels={}
+        for kind, count in pairs(counts) do
+            labels[#labels+1]=kind..": "..tostring(count)
+        end
+        table.sort(labels)
+        cactusActionSummary:SetDesc("Profile: "..tostring(_pqowshq.Owner.Profile or "None").." | Actions: "..tostring(#actions).."\n"..table.concat(labels," | "))
+    end
+})
+-- End restored workspace tools.
+
+end _lllIl1ll:Button({Title="Cactus Hub Discord",Desc="Copy the Cactus Hub server invite",Icon="link",Callback=function()
     local invite="https://discord.gg/CP2RHTgbFT"
     if type(setclipboard)=="function" then
         local ok=pcall(setclipboard,invite)
