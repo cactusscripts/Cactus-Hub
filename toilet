@@ -1,5 +1,5 @@
 --[[
-Cactus Hub branding / Info-tab Discord button — v5 (latest Legacy TTD & TTD).
+Cactus Hub branding / Info-tab Discord button — v6 (latest Legacy TTD & TTD).
 - Original Luraph-protected source follows this prelude byte-for-byte.
 - Brand text (including minimized label) is watched from early autoexecute startup.
 - Discord 'Press to Copy' is inserted in the existing Info tab BETWEEN the
@@ -12,7 +12,7 @@ do
     local BRAND = {
         FullTitle = "Cactus Hub | TTD",
         Discord = "https://discord.gg/CP2RHTgbFT",
-        Version = "20261127-info-tab-autoexec-v5",
+        Version = "20261127-info-tab-autoexec-v6",
     }
 
     local function safe(fn)
@@ -95,24 +95,39 @@ do
     end
     local function consider(o)
         if o:IsA("ScreenGui") then screens[o]=true end
-        if not isText(o) or tracked[o] then return end
-        tracked[o]=true
+        if not isText(o) then return end
+        -- Re-run on every scan: a protected UI can recreate its label with
+        -- the Kero value after the property-change event has fired.
         rebrandText(o)
+        if tracked[o] then return end
+        tracked[o]=true
         safe(function()
             o:GetPropertyChangedSignal("Text"):Connect(function()
                 rebrandText(o)
             end)
         end)
     end
-    local function watchRoot(root)
-        if not root or seenRoots[root] then return end
-        seenRoots[root]=true
+    local function scanDescendants(root)
         safe(function()
-            for _,obj in ipairs(root:GetDescendants()) do consider(obj) end
-            root.DescendantAdded:Connect(function(obj)
+            for _,obj in ipairs(root:GetDescendants()) do
                 consider(obj)
-            end)
+            end
         end)
+    end
+    local function watchRoot(root)
+        if not root then return end
+        if not seenRoots[root] then
+            seenRoots[root]=true
+            safe(function()
+                root.DescendantAdded:Connect(function(obj)
+                    consider(obj)
+                    -- A complete ScreenGui can be parented in one operation;
+                    -- cover its pre-existing descendants as well.
+                    if obj:IsA("ScreenGui") then scanDescendants(obj) end
+                end)
+            end)
+        end
+        scanDescendants(root)
     end
 
     local function copyInvite()
@@ -175,7 +190,7 @@ do
 
     local function tryInsertIntoScreen(screen)
         if not screen or not screen.Parent or inserted[screen] then return false end
-        if screen:FindFirstChild("CactusHub_Info_DiscordCopy_v5",true) then
+        if screen:FindFirstChild("CactusHub_Info_DiscordCopy_v6",true) then
             inserted[screen]=true
             return true
         end
@@ -207,7 +222,7 @@ do
                     end
                     if infoAt and supportAt and infoAt<supportAt then
                         local item=Instance.new("Frame")
-                        item.Name="CactusHub_Info_DiscordCopy_v5"
+                        item.Name="CactusHub_Info_DiscordCopy_v6"
                         item.BackgroundTransparency=1
                         item.BorderSizePixel=0
                         item.Size=UDim2.new(1,0,0,76)
@@ -313,7 +328,7 @@ do
         end)
     end
 
-    print("[Cactus Hub] v5 branding watcher installed (including autoexecute startup)")
+    print("[Cactus Hub v6 ACTIVE: auto-execute branding watcher initialized")
     task.spawn(function()
         local players=game:GetService("Players")
         local core=game:GetService("CoreGui")
@@ -333,7 +348,9 @@ do
                 if gui then watchRoot(gui) end
             end)
             safe(scanScreens)
-            task.wait(1.5)
+            -- Recheck previously seen roots, not only newly added instances.
+            -- This also catches minimized labels overwritten after launch.
+            task.wait(0.85)
         end
     end)
 end
