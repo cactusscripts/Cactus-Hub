@@ -1,3 +1,7 @@
+-- Cactus Hub | Camera TD | Forest Green WindUI
+-- Installs the green source to CameraTD_Macros/CactusHub_Green.lua for teleport reloading.
+-- Original Kero /Hub.lua is never used by this version.
+local CACTUS_GREEN_SOURCE = [========[
 -- Cactus Hub | Camera TD
 
 do
@@ -2914,10 +2918,10 @@ if not _0xd1a96.AutoExecute or II1l11l1IlI.Queued then
 return
 end
 local _0xbe3615fd=queue_on_teleport or queueonteleport or syn and syn.queue_on_teleport
-if type(_0xbe3615fd)~="function" or not II1l11l1IlI.FS or not isfile(II1l11l1IlI.Folder .. "/Hub.lua") then II1l11l1IlI.SetStatus("Macro","Auto Execute unavailable: queue_on_teleport + shared filesystem required")
+if type(_0xbe3615fd)~="function" or not II1l11l1IlI.FS or not isfile(II1l11l1IlI.Folder .. "/CactusHub_Green.lua") then II1l11l1IlI.SetStatus("Macro","Auto Execute unavailable: queue_on_teleport + shared filesystem required")
 return
 end
-local _lI1llIlI="        if game.GameId ~= 10762636904 then return end\n        task.wait(3)\n        local players = game:GetService(\"Players\")\n        local player = players.LocalPlayer or players.PlayerAdded:Wait()\n        local e = getgenv()\n        local key = tostring(game.JobId) .. \"/\" .. tostring(player.UserId)\n        if e.__CameraTDQueuedJob ~= key then\n            local enabled = true\n            local ok, raw = pcall(readfile, \"CameraTD_Macros/Settings/\" .. player.Name .. \".json\")\n            if ok then\n                local good, config = pcall(function() return game:GetService(\"HttpService\"):JSONDecode(raw) end)\n                if good and type(config) == \"table\" then enabled = config.AutoExecute ~= false end\n            end\n            if enabled then\n                local source = readfile(\"CameraTD_Macros/Hub.lua\")\n                local chunk, reason = loadstring(source)\n                assert(chunk, reason)\n                e.__CameraTDQueuedJob = key\n                chunk()\n            end\n        end\n    "
+local _lI1llIlI="        if game.GameId ~= 10762636904 then return end\n        task.wait(3)\n        local players = game:GetService(\"Players\")\n        local player = players.LocalPlayer or players.PlayerAdded:Wait()\n        local e = getgenv()\n        local key = tostring(game.JobId) .. \"/\" .. tostring(player.UserId)\n        if e.__CactusHubCameraTDGreenQueuedJob ~= key then\n            local enabled = true\n            local ok, raw = pcall(readfile, \"CameraTD_Macros/Settings/\" .. player.Name .. \".json\")\n            if ok then\n                local good, config = pcall(function() return game:GetService(\"HttpService\"):JSONDecode(raw) end)\n                if good and type(config) == \"table\" then enabled = config.AutoExecute ~= false end\n            end\n            if enabled then\n                local source = readfile(\"CameraTD_Macros/CactusHub_Green.lua\")\n                local chunk, reason = loadstring(source)\n                assert(chunk, reason)\n                e.__CactusHubCameraTDGreenQueuedJob = key\n                chunk()\n            end\n        end\n    "
 local ll11IllIl,lIIIll1I1=pcall(_0xbe3615fd,_lI1llIlI) II1l11l1IlI.Queued=ll11IllIl
 if not ll11IllIl then II1l11l1IlI.SetStatus("Macro","Auto Execute queue failed: " .. tostring(lIIIll1I1))
 end
@@ -4443,18 +4447,18 @@ elseif type(getcustomasset)=="function" and type(writefile)=="function" then
 end
 -- Custom WindUI theme: real library theme, not a recoloring overlay.
 _pijflkwsp:AddTheme({
-    Name="Cactus Emerald",
-    Accent=Color3.fromHex("#38C986"),
-    Background=Color3.fromHex("#122F25"),
-    Outline=Color3.fromHex("#407F64"),
-    Text=Color3.fromHex("#F2FFF8"),
-    Placeholder=Color3.fromHex("#A6CCB8"),
-    Button=Color3.fromHex("#215A43"),
-    Icon=Color3.fromHex("#B3FFD1"),
+    Name="Cactus Forest",
+    Accent=Color3.fromHex("#94E77B"),
+    Background=Color3.fromHex("#163524"),
+    Outline=Color3.fromHex("#6DB867"),
+    Text=Color3.fromHex("#F7FFF4"),
+    Placeholder=Color3.fromHex("#C2D4C4"),
+    Button=Color3.fromHex("#315E43"),
+    Icon=Color3.fromHex("#A2F18C"),
 })
-_pijflkwsp.TransparencyValue=0.24
+_pijflkwsp.TransparencyValue=0.29
 
-local l11I1IlllI1={Title="Cactus Hub | Camera TD",Author=Il11I1I11II.Author,Folder="CameraTDHub",Icon=CactusIcon,IconSize=42,IconThemed=false,Theme="Cactus Emerald",Size=UDim2.fromOffset(650,490),Transparent=true,HideSearchBar=true,NewElements=true,ToggleKey=Enum.KeyCode.RightShift,OpenButton={Title=Il11I1I11II.OpenButton,Enabled=true,Draggable=true,OnlyMobile=false}} II1l11l1IlI.AssertBrand(l11I1IlllI1)
+local l11I1IlllI1={Title="Cactus Hub | Camera TD",Author=Il11I1I11II.Author,Folder="CameraTDHub",Icon=CactusIcon,IconSize=42,IconThemed=false,Theme="Cactus Forest",Size=UDim2.fromOffset(650,490),Transparent=true,HideSearchBar=true,NewElements=true,ToggleKey=Enum.KeyCode.RightShift,OpenButton={Title=Il11I1I11II.OpenButton,Enabled=true,Draggable=true,OnlyMobile=false}} II1l11l1IlI.AssertBrand(l11I1IlllI1)
 local _0x10c0=_pijflkwsp:CreateWindow(l11I1IlllI1) II1l11l1IlI.Window=_0x10c0 _0x4510877d.WindowCreated=os.clock()
 local _0xe68a3ae8=_0x10c0:Tab({Title="Lobby",Icon="door-open"})
 local _dzgummu=_0x10c0:Tab({Title="Match",Icon="map"})
@@ -5630,3 +5634,20 @@ end) II1l11l1IlI.AssertBrand() II1l11l1IlI.Notify("Cactus Hub | Camera TD loaded
 while II1l11l1IlI.Running do II1l11l1IlI.AssertBrand() task.wait(1)
 end
 end) _0x4510877d.HubReady=os.clock()
+]========]
+local function InstallCactusGreen()
+    if type(writefile) ~= "function" or type(isfolder) ~= "function" or type(makefolder) ~= "function" then
+        warn("[Cactus Hub] Filesystem unavailable: teleport auto-execute cannot install the green version")
+        return false
+    end
+    local ok, err = pcall(function()
+        if not isfolder("CameraTD_Macros") then makefolder("CameraTD_Macros") end
+        writefile("CameraTD_Macros/CactusHub_Green.lua", CACTUS_GREEN_SOURCE)
+    end)
+    if not ok then warn("[Cactus Hub] Could not save green auto-execute file: " .. tostring(err)) end
+    return ok
+end
+InstallCactusGreen()
+local chunk, reason = loadstring(CACTUS_GREEN_SOURCE)
+assert(chunk, reason)
+return chunk()
